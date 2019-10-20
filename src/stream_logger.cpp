@@ -18,7 +18,7 @@
 namespace logging {
 
 template<typename T>
-stream_logger<T, true>::debug(std::string msg){
+void stream_logger<T, true>::debug(std::string msg){
 
 }
 
