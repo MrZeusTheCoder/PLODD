@@ -8,10 +8,10 @@
 /// @copyright Copyright (c) 2019 Elijah Hopp, No Rights Reserved
 /// 
 //////////////////////////////////////////////////////////////////////
-/*--------------------------------DEFINE_GUARD--------------------------------*/
+//--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_GET_TIME_H_
 #define PLODD_GET_TIME_H_
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #ifdef _WIN32 //Curse Windows. WAIT... Curses doesn't work ON WINDOWS... HA!
     #define WIN32_LEAN_AND_MEAN 1
     #define NOMINMAX 1
@@ -24,7 +24,7 @@
 //Nonetheless, these are here. No matter what.
 #include <iostream>
 #include <sstream>
-/*----------------------------------GET_TIME----------------------------------*/
+//----------------------------------GET_TIME----------------------------------//
 //////////////////////////////////////////////////////////////////////
 /// @brief Get the time by a format string.
 ///
@@ -60,5 +60,5 @@ inline std::string get_time(std::string format);
         return temp_ss.str();
     }
 #endif
-/*-----------------------------------END_IF-----------------------------------*/
+//-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_GET_TIME_H_

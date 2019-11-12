@@ -12,7 +12,6 @@ set(lib_sources
 	src/console_logger.cpp
 	src/file_logger.cpp
 	src/multi_file_logger.cpp
-	src/stream_logger.cpp
 )
 
 if(BUILD_SHARED_LIBS)

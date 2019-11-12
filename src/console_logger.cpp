@@ -2,14 +2,14 @@
 //
 //  The implementation file for "PLODD/console_logger.h".
 //
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/console_logger.h>
 
 #include <iostream>
 
 #include <PLODD/get_time.hpp>
 #include <PLODD/fmt/format.h>
-/*-------------------------------CONSOLE_LOGGER-------------------------------*/
+//-------------------------------CONSOLE_LOGGER-------------------------------//
 namespace logging {
 
 void console_logger::system_log(std::string msg){

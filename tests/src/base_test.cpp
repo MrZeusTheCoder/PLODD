@@ -2,11 +2,11 @@
 //
 //  Test file for "PLODD/include/base.h".
 //
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/base.h>
 
 #include <catch2/catch.hpp>
-/*-----------------------------BASE_LOGGER_TESTS------------------------------*/
+//-----------------------------BASE_LOGGER_TESTS------------------------------//
 using namespace logging;
 
 SCENARIO("A logger needs colour codes.", "[ansi_colours]"){

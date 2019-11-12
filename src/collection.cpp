@@ -2,11 +2,11 @@
 //
 //  The implementation file for "PLODD/collection.h".
 //
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/collection.h>
 
 #include <vector>
-/*-----------------------------LOGGER_COLLECTION------------------------------*/
+//-----------------------------LOGGER_COLLECTION------------------------------//
 namespace logging {
 
 template<typename T>

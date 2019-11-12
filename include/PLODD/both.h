@@ -2,17 +2,17 @@
 //
 //  A class that allows you to log to both the console and the files.
 // 
-/*--------------------------------DEFINE_GUARD--------------------------------*/
+//--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_BOTH_H_
 #define PLODD_BOTH_H_
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/base.h>
 
 #include <string>
 
 #include <PLODD/console_logger.h>
 #include <PLODD/file_logger.h>
-/*------------------------------------BOTH------------------------------------*/
+//------------------------------------BOTH------------------------------------//
 namespace logging {
 
 class both_logger : public base_logger {
@@ -31,5 +31,5 @@ class both_logger : public base_logger {
 extern both_logger both;
 
 } //logging
-/*-----------------------------------END_IF-----------------------------------*/
+//-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_BOTH_H_

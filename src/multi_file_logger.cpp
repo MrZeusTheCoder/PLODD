@@ -2,7 +2,7 @@
 //
 //  The implementation file for "PLODD/multi_file_logger.h".
 //
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/multi_file_logger.h>
 
 #include <string>
@@ -10,7 +10,7 @@
 
 #include <PLODD/base.h>
 #include <PLODD/get_time.hpp>
-/*-----------------------------MULTI-FILE_LOGGER------------------------------*/
+//-----------------------------MULTI-FILE_LOGGER------------------------------//
 namespace logging {
 
 void multi_file_logger::system_log(std::string msg){

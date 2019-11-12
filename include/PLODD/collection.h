@@ -4,15 +4,15 @@
 //  (sarcasm kills us on the inside, yet humans find this masochistically...
 //  funny?)
 // 
-/*--------------------------------DEFINE_GUARD--------------------------------*/
+//--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_COLLECTION_H_
 #define PLODD_COLLECTION_H_
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/base.h>
 
 #include <type_traits>
 #include <vector>
-/*-----------------------------LOGGER_COLLECTION------------------------------*/
+//-----------------------------LOGGER_COLLECTION------------------------------//
 namespace logging {
 
 //So basically because for this to be fully extendable and useable regardless
@@ -134,5 +134,5 @@ class collection : public base_logger {
 
 } 
 
-/*-----------------------------------END_IF-----------------------------------*/
+//-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_COLLECTION_H_

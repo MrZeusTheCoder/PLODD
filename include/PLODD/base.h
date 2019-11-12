@@ -2,13 +2,13 @@
 //
 //  This file provides the needed base needs for any loggers.
 // 
-/*--------------------------------DEFINE_GUARD--------------------------------*/
+//--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_BASE_H_
 #define PLODD_BASE_H_
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <iostream>
 #include "fmt/format.h"
-/*----------------------------DEFINES_AND_STUFFING----------------------------*/
+//----------------------------DEFINES_AND_STUFFING----------------------------//
 #ifdef _WIN32
     #undef ERROR //Windows employee: Why? Why not? Also I took an online test that said I was a sadist, but that's unimportant.
     //^^^^^^^^^^ This will undefine any use of the word ERROR. This word is used throughout PLODD. :|
@@ -27,10 +27,10 @@
     #define PLODD_xstr(string) PLODD_str(string)
     #define PLODD_NAMESPACE_STR PLODD_xstr(PLODD_NAMESPACE)
 #endif
-/*---------------------------------PLODD_BASE---------------------------------*/
+//---------------------------------PLODD_BASE---------------------------------//
 namespace PLODD_NAMESPACE {
 namespace colours {
-/*---------------------------COLOURS---------------------------*/
+//---------------------------COLOURS---------------------------//
 //Notice how most of these are bold. I wanted them most of them to be bold, 
 //but didn't want to write white_bold and red_bold all the time. It isn't 
 //laziness, it's abstraction :D
@@ -43,7 +43,7 @@ const std::string red = "\033[1;31m";
 const std::string reverse_vid = "\033[7m";
 } //colours
 } //logging
-/*-------------------------------LOGGING_LEVELS-------------------------------*/
+//-------------------------------LOGGING_LEVELS-------------------------------//
 namespace logging {
 
 enum class level {
@@ -88,7 +88,7 @@ class base_logger {
         void errorf(std::string fmt_str, const Args&... fmt_args){error(fmt::format(fmt_str, fmt_args...));}
 };
 
-/*---------------------------------SFML_PLODD---------------------------------*/
+//---------------------------------SFML_PLODD---------------------------------//
 #ifdef SFML_PLODD
 #include "fmt/format.h"
 #include <SFML/Graphics/Color.hpp>
@@ -120,5 +120,5 @@ struct fmt::formatter<sf::Color>{
 #endif
 
 } //logging
-/*-----------------------------------END_IF-----------------------------------*/
+//-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_BASE_H_

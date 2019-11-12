@@ -2,11 +2,11 @@
 //
 //  The implementation file for "PLODD/base.h".
 //
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/base.h>
-/*--------------------------------LOGGING_BASE--------------------------------*/
+//--------------------------------LOGGING_BASE--------------------------------//
 namespace logging {
-/*-------------------------LEVEL_NAME--------------------------*/
+//-------------------------LEVEL_NAME--------------------------//
 std::string level_name(logging_level level){
     switch(level){
         default:
@@ -21,7 +21,7 @@ std::string level_name(logging_level level){
             return std::string("ERROR");
     }
 }
-/*-------------------------BASE_LOGGER-------------------------*/
+//-------------------------BASE_LOGGER-------------------------//
 void base_logger::set_level(logging_level new_level){
     logger_level = new_level;
 }

@@ -2,6 +2,6 @@
 //
 //  This file tells Catch2 to config a int main().
 //
-/*------------------------------DEFINES/INCLUDES------------------------------*/
+//------------------------------DEFINES/INCLUDES------------------------------//
 #define CATCH_CONFIG_MAIN 1
 #include <catch2/catch.hpp>

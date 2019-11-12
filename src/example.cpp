@@ -7,7 +7,6 @@
 #include <PLODD/collection.h>
 #include <PLODD/both.h>
 #include <PLODD/get_time.hpp>
-#include <PLODD/stream_logger.h>
 
 void test_file_logging(){
     logging::file.debug("HEYO! This is a file debug."); 
@@ -34,42 +33,17 @@ void test_both_logging(){
     logging::both.errorf("Error {} that{}s {} Number of the day: 42. Date: {} (believe it or not). Also: NUMBERS: {}!", "log with a twist", "'", "crazy, mon!", get_time("%D"), 816.3264);
 }
 
-class A {};
+class A {
+    private:
+        std::string latest_msg;
+    public:
+        void operator<<(std::string& msg){ latest_msg = msg; }
+        void print_latest_msg(){ std::cout << latest_msg; }
+};
+
 
 int main(){
-    /*
-    logging::console_logger a("A", logging::level::DEBUG);
-    logging::console_logger b("B", logging::level::DEBUG);
-    logging::console_logger c("C", logging::level::DEBUG);
-    logging::collection<logging::console_logger> abc{&a, &b, &c};
-    logging::console_logger D("D", logging::level::DEBUG);
-    logging::console_logger E("E", logging::level::DEBUG);
-    logging::console_logger F("F", logging::level::DEBUG);
-    logging::collection<logging::console_logger> def{&D, &E, &F};
-    std::cout << "abc:\n";
-    for(auto& x : abc){
-        x->debug("HEY!");
-    }
-    std::cout << "def:\n";
-    for(auto& x : def){
-        x->debug("HEY!");
-    }
-	
-    abc.swap(&def);
-
-    std::cout << "abc:\n";
-    for(auto& x : abc){
-        x->debug("HEY!");
-    }
-    std::cout << "def:\n";
-    for(auto& x : def){
-        x->debug("HEY!");
-    }
-    */
-    A foo;
-    logging::stream_logger<std::ostream, true> a(&std::cout, "A", logging::level::DEBUG);
-    a.debug("HEYO!");
-    exit(0);
+    
     
     
     //BEFORE_NEXT_RELEASE: Add check for existence of directory and make if not there, THEN init file logger in there.

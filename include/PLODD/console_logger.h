@@ -3,15 +3,15 @@
 //  This header makes a console logger class, and make an instance of the
 //  console logger globally available.
 //
-/*--------------------------------DEFINE_GUARD--------------------------------*/
+//--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_CONSOLE_LOGGER_H_
 #define PLODD_CONSOLE_LOGGER_H_
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <iostream>
 
 #include <PLODD/base.h>
 #include "fmt/format.h"
-/*-------------------------------CONSOLE_LOGGER-------------------------------*/
+//-------------------------------CONSOLE_LOGGER-------------------------------//
 namespace logging {
 
 class console_logger : public base_logger {
@@ -30,5 +30,5 @@ class console_logger : public base_logger {
 extern console_logger console;
 
 } //logging
-/*-----------------------------------END_IF-----------------------------------*/
+//-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_LOGGING_H_
