@@ -13,7 +13,7 @@
     #undef ERROR //Windows employee: Why? Why not? Also I took an online test that said I was a sadist, but that's unimportant.
     //^^^^^^^^^^ This will undefine any use of the word ERROR. This word is used throughout PLODD. :|
     #define NOMINMAX 1 //I like the one. Feels more explicit.
-    #define PLODD_NO_ANSI 1
+    #define NO_ANSI_PLODD 1
 #endif
 //
 #ifndef PLODD_NAMESPACE
@@ -79,13 +79,13 @@ class base_logger {
         virtual void warn(std::string msg) = 0;
         virtual void error(std::string msg) = 0;
         template<class... Args>
-        void debugf(std::string fmt_str, const Args&... fmt_args){debug(fmt::format(fmt_str, fmt_args...));}
+        void debugf(std::string fmt_str, const Args&... fmt_args){debug(fmt::format(fmt_str, fmt_args...).c_str());}
         template<class... Args>
-        void infof(std::string fmt_str, const Args&... fmt_args){info(fmt::format(fmt_str, fmt_args...));}
+        void infof(std::string fmt_str, const Args&... fmt_args){info(fmt::format(fmt_str, fmt_args...).c_str());}
         template<class... Args>
-        void warnf(std::string fmt_str, const Args&... fmt_args){warn(fmt::format(fmt_str, fmt_args...));}
+        void warnf(std::string fmt_str, const Args&... fmt_args){warn(fmt::format(fmt_str, fmt_args...).c_str());}
         template<class... Args>
-        void errorf(std::string fmt_str, const Args&... fmt_args){error(fmt::format(fmt_str, fmt_args...));}
+        void errorf(std::string fmt_str, const Args&... fmt_args){error(fmt::format(fmt_str, fmt_args...).c_str());}
 };
 
 //---------------------------------SFML_PLODD---------------------------------//

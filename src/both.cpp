@@ -5,7 +5,7 @@
 //----------------------------------INCLUDES----------------------------------//
 #include <PLODD/both.h>
 
-#include <PLODD/get_time.hpp>
+#include <PLODD/get_time.h>
 //------------------------------------BOTH------------------------------------//
 namespace logging {
 

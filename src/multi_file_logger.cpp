@@ -9,7 +9,7 @@
 #include <fstream>
 
 #include <PLODD/base.h>
-#include <PLODD/get_time.hpp>
+#include <PLODD/get_time.h>
 //-----------------------------MULTI-FILE_LOGGER------------------------------//
 namespace logging {
 

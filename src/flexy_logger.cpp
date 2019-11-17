@@ -16,7 +16,7 @@
 
 #include <iostream>
 
-#include <PLODD/get_time.hpp>
+#include <PLODD/get_time.h>
 //-------------------------------STREAM_LOGGER--------------------------------//
 namespace logging {
 

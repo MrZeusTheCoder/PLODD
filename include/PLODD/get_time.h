@@ -53,6 +53,7 @@ inline std::string get_time(std::string format);
         }
     }
 #else
+    //TODO: YOU MUST OPTIMIZE THIS. Callgrind said it accounted for 70% of the function's call time.
     inline std::string get_time(std::string format){
         std::stringstream temp_ss;
         time_t temp_time = std::time(0);

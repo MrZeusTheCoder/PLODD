@@ -1,34 +1,20 @@
 //  Copyright (C) Elijah Hopp 2019, All Rights Reserved.
 //
-//  This header makes a console logger class, and make an instance of the
-//  console logger globally available.
-//
-//--------------------------------DEFINE_GUARD--------------------------------//
+//  Logggggggggssss tostd::coutcuzwhynot? Haz me c0ff33. p1z I h4z n33d
+//  m0n3y. d0n4t3 n0w.
+// 
+/*--------------------------------DEFINE_GUARD--------------------------------*/
 #ifndef PLODD_CONSOLE_LOGGER_H_
 #define PLODD_CONSOLE_LOGGER_H_
-//----------------------------------INCLUDES----------------------------------//
+/*----------------------------------INCLUDES----------------------------------*/
+#include <PLODD/ostream_logger.h>
 #include <iostream>
-
-#include <PLODD/base.h>
-#include "fmt/format.h"
 //-------------------------------CONSOLE_LOGGER-------------------------------//
 namespace logging {
 
-class console_logger : public base_logger {
-    private:
-        void system_log(std::string msg);
-    public:
-        console_logger(std::string logger_name_, logging_level logging_level_);
-        void set_level(logging_level new_level);
-        void set_name(std::string new_name);
-        void debug(std::string msg);
-        void info(std::string msg);
-        void warn(std::string msg);
-        void error(std::string msg);
-};
-
-extern console_logger console;
+//Exposes a console logger for use like so: "logging::console.info("p1z h4z m3 m0n3y... p1z?");"
+extern ostream_logger console;
 
 } //logging
-//-----------------------------------END_IF-----------------------------------//
-#endif //PLODD_LOGGING_H_
+/*-----------------------------------END_IF-----------------------------------*/
+#endif //PLODD_CONSOLE_LOGGER_H_
