@@ -4,8 +4,10 @@ include(CTest)
 
 #Test executable sources:
 set(test_sources
-    src/main.cpp
+    src/catch_main.cpp
     src/base_test.cpp
+    src/ostream_logger_test.cpp
+    src/uf_ostream_logger_test.cpp
 )
 
 #Test targets:

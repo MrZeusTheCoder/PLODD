@@ -8,12 +8,12 @@
 #ifndef PLODD_COLLECTION_H_
 #define PLODD_COLLECTION_H_
 //----------------------------------INCLUDES----------------------------------//
-#include <PLODD/base.h>
+#include "base.h"
 
 #include <type_traits>
 #include <vector>
 //-----------------------------LOGGER_COLLECTION------------------------------//
-namespace logging {
+namespace pld {
 
 //So basically because for this to be fully extendable and useable regardless
 //of wether a specialization for a logger is defined or not then all the
@@ -132,7 +132,6 @@ class collection : public base_logger {
 
 };
 
-} 
-
+} //pld
 //-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_COLLECTION_H_

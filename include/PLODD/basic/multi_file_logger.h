@@ -12,12 +12,12 @@
 #ifndef PLODD_MULTI_FILE_LOGGER_H_
 #define PLODD_MULTI_FILE_LOGGER_H_
 //----------------------------------INCLUDES----------------------------------//
+#include "base.h"
+
 #include <fstream>
 #include <string>
-
-#include <PLODD/base.h>
 //-----------------------------MULTI-FILE_LOGGER------------------------------//
-namespace logging {
+namespace pld {
 
 //////////////////////////////////////////////////////////////////////
 /// @brief A multi-file(-sink?) file logger that logs to three 
@@ -67,6 +67,6 @@ class multi_file_logger : public base_logger {
         void error(std::string msg);
 };
 
-} //logging
+} //pld
 //-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_MULTI_FILE_LOGGER_H_

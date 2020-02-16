@@ -23,8 +23,10 @@
 #endif
 //Nonetheless, these are here. No matter what.
 #include <iostream>
-#include <sstream>
+
+//#include "fmt/format.h"
 //----------------------------------GET_TIME----------------------------------//
+/*
 //////////////////////////////////////////////////////////////////////
 /// @brief Get the time by a format string.
 ///
@@ -37,28 +39,30 @@
 /// @param format The format of the returned string. On Windows it must be "%T" or "%D".
 /// @return std::string The string representation of the requested format.
 //////////////////////////////////////////////////////////////////////
-inline std::string get_time(std::string format);
-
+*/
 #ifdef _WIN32
-    inline std::string get_time(std::string format){
-        std::stringstream temp_ss;
+    //TODO: Maybe do speedtest Windows once you have figured out Linux time.
+    inline std::string get_time(){
         SYSTEMTIME local_time;
-        //Retrive time:
         GetLocalTime(&local_time);
-        //
-        if(format.c_str() == "%T"){
-            temp_ss << local_time.wHour << ":" local_time.wMinute << ":" << local_time.wSecond; //<< "." << local_time.WMilliseconds (You don't get mills Windows users. HA!)
-        } elif(format.c_str() == "%D") {
-            temp_ss << local_time.wYear << "/" << local_time.wMonth << "/" << local_time.wDay;
-        }
+        return fmt::format("{}:{}:{}", local_time.wHour, local_time.wMinute, local_time.wSecond);
+    }
+    inline std::string get_date(){
+        SYSTEMTIME local_time;
+        GetLocalTime(&local_time);
+        return fmt::format("{}-{}-{}", local_time.wYear, local_time.wMonth, local_time.wDay);
     }
 #else
-    //TODO: YOU MUST OPTIMIZE THIS. Callgrind said it accounted for 70% of the function's call time.
-    inline std::string get_time(std::string format){
-        std::stringstream temp_ss;
-        time_t temp_time = std::time(0);
-        temp_ss << std::put_time(std::localtime(&temp_time), format.c_str());
-        return temp_ss.str();
+    //TODO: YOU MUST OPTIMIZE THIS. EVEN MORE!!!!!! Callgrind said it accounted for over 70% of the function's call time.
+    inline std::string get_time(){        
+        time_t tea_time = std::time(0);
+        tm* timely = std::localtime(&tea_time);
+        return fmt::format("{}:{}:{}", timely->tm_hour, timely->tm_min, timely->tm_sec);
+    }
+    inline std::string get_date(){
+        time_t tea_time = std::time(0);
+        tm* timely = std::localtime(&tea_time);
+        return fmt::format("{}-{}-{}", (timely->tm_year + 1900), (timely->tm_mon + 1), (timely->tm_mday));
     }
 #endif
 //-----------------------------------END_IF-----------------------------------//

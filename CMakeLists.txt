@@ -7,12 +7,13 @@ option(BUILD_PLODD_DOCS "Build the Doxygen PLODD documentation." OFF)
 option(BUILD_PLODD_TESTS "Build and execute tests for PLODD" OFF)
 
 set(lib_sources
-    src/base.cpp
-	src/both.cpp
-	src/console_logger.cpp
-	src/file_logger.cpp
-	src/multi_file_logger.cpp
-	src/ostream_logger.cpp
+    src/basic/base.cpp
+	src/basic/both.cpp
+	src/basic/console_logger.cpp
+	src/basic/file_logger.cpp
+	src/basic/multi_file_logger.cpp
+	src/basic/ostream_logger.cpp
+	src/basic/uf_ostream_logger.cpp
 )
 
 if(BUILD_SHARED_LIBS)
@@ -35,7 +36,6 @@ if(BUILD_PLODD_TESTS)
 endif()
 
 #BEFORE_RELEASE: Remove these options.
-#BEFORE_COMMIT: Remove these options.
 target_compile_options(PLODD
     PRIVATE "-Wextra"
     PRIVATE "-Werror"

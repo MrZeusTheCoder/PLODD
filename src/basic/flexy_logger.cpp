@@ -12,13 +12,13 @@
 /// 
 //////////////////////////////////////////////////////////////////////
 //----------------------------------INCLUDES----------------------------------//
-#include <PLODD/flexy_logger.h>
+#include <PLODD/basic/flexy_logger.h>
 
 #include <iostream>
 
-#include <PLODD/get_time.h>
+#include <PLODD/basic/time.hpp>
 //-------------------------------STREAM_LOGGER--------------------------------//
-namespace logging {
+namespace pld {
 
 
 

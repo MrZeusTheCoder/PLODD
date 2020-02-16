@@ -1,13 +1,13 @@
 //  Copyright (C) Elijah Hopp 2019, All Rights Reserved.
 //
-//  The implementation file for "PLODD/collection.h".
+//  The implementation file for "PLODD/basic/collection.h".
 //
 //----------------------------------INCLUDES----------------------------------//
-#include <PLODD/collection.h>
+#include <PLODD/basic/collection.h>
 
 #include <vector>
 //-----------------------------LOGGER_COLLECTION------------------------------//
-namespace logging {
+namespace pld {
 
 template<typename T>
 using vec_iter = typename std::vector<T>::iterator;

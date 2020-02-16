@@ -7,14 +7,14 @@
 #ifndef PLODD_CONSOLE_LOGGER_H_
 #define PLODD_CONSOLE_LOGGER_H_
 /*----------------------------------INCLUDES----------------------------------*/
-#include <PLODD/ostream_logger.h>
+#include <PLODD/basic/ostream_logger.h>
 #include <iostream>
 //-------------------------------CONSOLE_LOGGER-------------------------------//
-namespace logging {
+namespace pld {
 
 //Exposes a console logger for use like so: "logging::console.info("p1z h4z m3 m0n3y... p1z?");"
 extern ostream_logger console;
 
-} //logging
+} //pld
 /*-----------------------------------END_IF-----------------------------------*/
 #endif //PLODD_CONSOLE_LOGGER_H_

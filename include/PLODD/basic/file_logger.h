@@ -6,13 +6,13 @@
 #ifndef PLODD_FILE_LOGGER_H_
 #define PLODD_FILE_LOGGER_H_
 //----------------------------------INCLUDES----------------------------------//
-#include <PLODD/multi_file_logger.h>
+#include "multi_file_logger.h"
 //--------------------------------FILE_LOGGER---------------------------------//
-namespace logging {
+namespace pld {
 
 //Exposes a file logger for use like so: "logging::file.info("fake, helpful info.");"
 extern multi_file_logger file;
 
-} //logging
+} //pld
 //-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_FILE_LOGGER_H_
