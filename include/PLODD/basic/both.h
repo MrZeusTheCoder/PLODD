@@ -13,8 +13,6 @@
 namespace pld {
 
 class both_logger : public base_logger {
-    private:
-        void system_log(std::string msg);
     public:
         both_logger() : base_logger("BOTH", logging_level::ERROR){};
         void set_level(logging_level new_level);

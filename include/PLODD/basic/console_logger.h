@@ -3,10 +3,10 @@
 //  Logggggggggssss tostd::coutcuzwhynot? Haz me c0ff33. p1z I h4z n33d
 //  m0n3y. d0n4t3 n0w.
 // 
-/*--------------------------------DEFINE_GUARD--------------------------------*/
+//--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_CONSOLE_LOGGER_H_
 #define PLODD_CONSOLE_LOGGER_H_
-/*----------------------------------INCLUDES----------------------------------*/
+//----------------------------------INCLUDES----------------------------------//
 #include <PLODD/basic/ostream_logger.h>
 #include <iostream>
 //-------------------------------CONSOLE_LOGGER-------------------------------//
@@ -16,5 +16,5 @@ namespace pld {
 extern ostream_logger console;
 
 } //pld
-/*-----------------------------------END_IF-----------------------------------*/
+//-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_CONSOLE_LOGGER_H_

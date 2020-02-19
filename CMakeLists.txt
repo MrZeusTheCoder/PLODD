@@ -12,6 +12,7 @@ set(lib_sources
 	src/basic/console_logger.cpp
 	src/basic/file_logger.cpp
 	src/basic/multi_file_logger.cpp
+	src/basic/single_file_logger.cpp
 	src/basic/ostream_logger.cpp
 	src/basic/uf_ostream_logger.cpp
 )

@@ -8,13 +8,9 @@
 #include <PLODD/basic/base.h>
 #include <PLODD/basic/console_logger.h>
 #include <PLODD/basic/file_logger.h>
-#include <PLODD/basic/time.hpp>
+#include <PLODD/time.hpp>
 //------------------------------------BOTH------------------------------------//
 namespace pld {
-
-void both_logger::system_log(std::string msg){
-    std::cout << colours::reverse_vid << "[" << get_date() << " " << get_time() << "]:PLODD:INTERNAL_SYSTEM:" << msg << colours::reset << "\n";
-}
 
 void both_logger::set_level(logging_level new_level){
     console.set_level(new_level);
@@ -22,7 +18,6 @@ void both_logger::set_level(logging_level new_level){
 }
 
 void both_logger::set_name(std::string new_name){
-    system_log("\"both\" logger is attempting to change other logger's names to \"" + new_name + "\".");
     console.set_name(new_name);
     file.set_name(new_name);
 }

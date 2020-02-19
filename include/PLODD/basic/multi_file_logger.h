@@ -38,29 +38,23 @@ class multi_file_logger : public base_logger {
         std::ofstream main_file;
         std::ofstream debug_file;
         std::ofstream error_file;
-        void system_log(std::string msg);
-        void system_log_to_files(std::string msg);
+        void init_files(std::string path);
     public:
         //////////////////////////////////////////////////////////////////////
-        /// @brief Construct a new multi-file logger object
+        /// @brief Constructs a new multi-file logger object and initializes the output files.
         /// 
-        /// @param logger_name_ The name used in the format.
-        /// @param logger_level_ The level that the 
+        /// @param output_path The path to the directory where the output files are placed
+        /// @param logger_name The name of the logger.
+        /// @param logger_level The minimum logging level at which the logger will write output.
         //////////////////////////////////////////////////////////////////////
-        multi_file_logger(std::string logger_name_, logging_level logger_level_);
+        multi_file_logger(std::string output_path, std::string logger_name, logging_level logger_level);
         //////////////////////////////////////////////////////////////////////
-        /// @brief Initialize/clears (re-inits) log files in the CWD.
-        //////////////////////////////////////////////////////////////////////
-        void init_files();
-        //////////////////////////////////////////////////////////////////////
-        /// @brief Initialize/clears (re-inits) log files in the explicit path.
+        /// @brief Constructs a new multi-file logger object, without initalizing the output files.
         /// 
-        /// @param explicit_path Full or relative path to the logging 
-        /// location.
+        /// @param logger_name The name of the logger.
+        /// @param logger_level The minimum logging level at which the logger will write output.
         //////////////////////////////////////////////////////////////////////
-        void init_files(std::string explicit_path);
-        void set_level(logging_level new_level);
-        void set_name(std::string new_name);
+        multi_file_logger(std::string logger_name, logging_level logger_level);
         void debug(std::string msg);
         void info(std::string msg);
         void warn(std::string msg);

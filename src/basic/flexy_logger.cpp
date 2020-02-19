@@ -16,7 +16,7 @@
 
 #include <iostream>
 
-#include <PLODD/basic/time.hpp>
+#include <PLODD/time.hpp>
 //-------------------------------STREAM_LOGGER--------------------------------//
 namespace pld {
 

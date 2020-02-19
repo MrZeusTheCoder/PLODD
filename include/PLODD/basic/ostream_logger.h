@@ -22,7 +22,7 @@ class ostream_logger : public base_logger {
     private:
         std::ostream * stream_ptr;
     public:
-        ostream_logger(std::ostream * stream_ptr, std::string logger_name, logging_level logger_level) : base_logger(logger_name, logger_level), stream_ptr(stream_ptr){}
+        ostream_logger(std::ostream * stream_ptr, std::string logger_name, logging_level logger_level);
         void set_stream(std::ostream * new_stream_ptr);
         virtual void debug(std::string msg);
         virtual void info(std::string msg);

@@ -55,8 +55,8 @@ class base_logger {
         std::string logger_name;
         logging_level logger_level;
     public:
-        base_logger(std::string logger_name, logging_level logger_level) : 
-        logger_name(logger_name), logger_level(logger_level){}
+        base_logger(std::string logger_name, logging_level logger_level) : logger_name(logger_name), logger_level(logger_level){}
+        virtual ~base_logger(){}
         virtual void set_level(logging_level new_level);
         virtual void set_name(std::string new_name);
         virtual logging_level get_level();

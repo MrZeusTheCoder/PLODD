@@ -5,9 +5,11 @@
 //----------------------------------INCLUDES----------------------------------//
 #include <PLODD/basic/ostream_logger.h>
 
-#include <PLODD/basic/time.hpp>
+#include <PLODD/time.hpp>
 //------------------------------OSTREAM_LOGGER--------------------------------//
 namespace pld {
+
+ostream_logger::ostream_logger(std::ostream * stream_ptr, std::string logger_name, logging_level logger_level) : base_logger(logger_name, logger_level), stream_ptr(stream_ptr){}
 
 void ostream_logger::set_stream(std::ostream * new_stream_ptr){
     stream_ptr = new_stream_ptr;
