@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 #include <PLODD/basic/file_logger.h>
 #include <PLODD/basic/console_logger.h>
@@ -8,7 +10,7 @@
 #include <PLODD/basic/ostream_logger.h>
 
 void test_file_logging(){
-    pld::file.debug("HEYO! This is a file debug."); 
+    pld::file.debug("HEYO! This is a file debug.");
     pld::file.info("HEYO! This is a file info.");
     pld::file.warn("HEYO! This is a file warn.");
     pld::file.error("HEYO! This is a file error.");
@@ -17,46 +19,33 @@ void test_file_logging(){
 }
 
 void test_console_logging(){
-    pld::console.debug("HEYO! This is a console debug."); 
+    pld::console.debug("HEYO! This is a console debug.");
+    std::cout << "Pretend to do something while your boss is watching...\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1500));
     pld::console.info("HEYO! This is a console info.");
+    std::cout << "Twiddle your thumbs some more...\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1300));
     pld::console.warn("HEYO! This is a console warn.");
-    pld::console.error("HEYO! This is a console error.");
+    std::cout << "Claim you are waiting for some containers to spool up...\n";
+    std::this_thread::sleep_for(std::chrono::milliseconds(1700));
+    pld::console.error("A fatal error occurred in boss::relationship::work. (This is a console error, by the way.)");
 }
 
 void test_both_logging(){
     pld::both.debug("HEYO! This is a debug log from the \"both\" logger, heh.");
+    //1.2 seconds is the Golden Wait Time, trust me. Thousands of human hours have been wasted in market research.
+    std::this_thread::sleep_for(std::chrono::milliseconds(1200));
     pld::both.info("HEYO! This is a info log from the \"both\" logger, heh.");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1200));
     pld::both.warn("HEYO! This is a warn log from the \"both\" logger, heh.");
+    std::this_thread::sleep_for(std::chrono::milliseconds(1200));
     pld::both.error("HEYO! This is a error log from the \"both\" logger, heh.");
-
-    pld::both.errorf("Error {} that{}s {} Number of the day: 42. Date: {} (believe it or not). Also: NUMBERS: {}!", "log with a twist", "'", "crazy, mon!", get_date(), 816.3264);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1200));
+    pld::both.errorf("TWIST! Error {} That{}s {} Number of the day: 42. Date: {} (believe it or not). Also: NUMBERS! {}!", "log with formatting, :).", "'", "crazy, mon!", get_date(), 816.3264);
 }
 
-#include <chrono>
-using sc = std::chrono::steady_clock;
-namespace c = std::chrono;
 
-const char * _64_null_str = "\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x01\x00"; 
 
-unsigned int time_log_string(pld::base_logger * logger, int sample_size){
-    sc::time_point start = sc::now();
-    for(int i = 0; i <= sample_size; i++){
-        logger->debug(_64_null_str);
-    }
-    sc::time_point end = sc::now();
-    return c::duration_cast<c::nanoseconds>((end - start) / sample_size).count();
-}
-
-class NullStream : public std::ostream {
-public:
-  NullStream() : std::ostream(nullptr) {}
-  //NullStream(const NullStream &) : std::ostream(nullptr) {}
-};
-
-template <class T>
-const NullStream &operator<<(NullStream &&os, const T &value) { 
-  return os;
-}
 
 int main(){
     /*
@@ -66,10 +55,8 @@ int main(){
     std::cout << "Testing file logger...\n";
     test_file_logging();
     */
-    NullStream null_stream;
-    pld::ostream_logger test_logger(&null_stream, "Heyo", pld::level::DEBUG);
-    int num_samples = 800000;
-    std::cout << "Average log time (over " << num_samples << " samples): " << time_log_string(&test_logger, num_samples) << "ns\n";	
+    test_console_logging();
+    test_both_logging();
     /*
     std::cout << "Testing \"both\" logger...\n";
     test_both_logging();

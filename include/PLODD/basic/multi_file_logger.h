@@ -2,7 +2,7 @@
 /// @file multi_file_logger.h
 /// @author Elijah Hopp (github.mrzeusthecoder@gmail.com)
 /// @brief A logger that outputs to multipule files.
-/// @version 0.1
+/// @version 0.0.0
 /// @date 2019-07-22 
 ///
 /// @copyright Copyright (c) 2019 Elijah Hopp, No Rights Reserved

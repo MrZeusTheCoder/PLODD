@@ -2,7 +2,7 @@
 // @file PLODD_version.hpp
 // @author Elijah Hopp (github.mrzeusthecoder@gmail.com)
 // @brief 
-// @version 0.1
+// @version 0.0.0
 // @date 2019-07-20
 // 
 // @copyright Copyright (c) 2019 Elijah Hopp, No Rights Reserved

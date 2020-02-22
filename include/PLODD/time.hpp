@@ -2,7 +2,7 @@
 /// @file get_time.hpp
 /// @author Elijah Hopp (github.mrzeusthecoder@gmail.com)
 /// @brief A time getter function for (semi-)internal use.
-/// @version 0.1
+/// @version 0.0.0
 /// @date 2019-07-22
 /// 
 /// @copyright Copyright (c) 2019 Elijah Hopp, No Rights Reserved
@@ -40,6 +40,13 @@
 /// @return std::string The string representation of the requested format.
 //////////////////////////////////////////////////////////////////////
 */
+
+//Generating the time is expensive, so you just check if the elapsed seconds (since 1970... whatever) have changed,
+//and if it hasn't use the old one.
+static time_t last_read_time = 0;
+static std::string last_generated_time;
+static std::string last_generated_date;
+
 #ifdef _WIN32
     //TODO: Maybe do speedtest Windows once you have figured out Linux time.
     inline std::string get_time(){
@@ -53,16 +60,28 @@
         return fmt::format("{}-{}-{}", local_time.wYear, local_time.wMonth, local_time.wDay);
     }
 #else
-    //TODO: YOU MUST OPTIMIZE THIS. EVEN MORE!!!!!! Callgrind said it accounted for over 70% of the function's call time.
-    inline std::string get_time(){        
+    inline std::string get_time(){
         time_t tea_time = std::time(0);
-        tm* timely = std::localtime(&tea_time);
-        return fmt::format("{}:{}:{}", timely->tm_hour, timely->tm_min, timely->tm_sec);
+        if(tea_time == last_read_time){
+            return last_generated_time;
+        } else {
+            tm* timely = std::localtime(&tea_time);
+            last_generated_time = fmt::format("{}:{}:{}", timely->tm_hour, timely->tm_min, timely->tm_sec);
+            last_read_time = tea_time;
+            return last_generated_time;
+        }
     }
     inline std::string get_date(){
         time_t tea_time = std::time(0);
-        tm* timely = std::localtime(&tea_time);
-        return fmt::format("{}-{}-{}", (timely->tm_year + 1900), (timely->tm_mon + 1), (timely->tm_mday));
+        if(tea_time == last_read_time){
+            return last_generated_date;
+        } else {
+            tm* timely = std::localtime(&tea_time);
+            last_generated_date = fmt::format("{}-{}-{}", (timely->tm_year + 1900), (timely->tm_mon + 1), (timely->tm_mday));
+            last_read_time = tea_time;
+            return last_generated_date;
+        }
+        
     }
 #endif
 //-----------------------------------END_IF-----------------------------------//
