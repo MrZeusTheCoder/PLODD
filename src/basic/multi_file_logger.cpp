@@ -9,12 +9,16 @@
 #include <fstream>
 
 #include <PLODD/basic/base.h>
-#include <PLODD/time.hpp>
+#include <PLODD/basic/time.hpp>
 //-----------------------------MULTI-FILE_LOGGER------------------------------//
 namespace pld {
 
-multi_file_logger::multi_file_logger(std::string output_path, std::string logger_name, logging_level logger_level) : base_logger(logger_name, logger_level){
-    init_files(output_path);
+multi_file_logger::multi_file_logger(std::string output_directory_path, std::string logger_name, logging_level logger_level) : base_logger(logger_name, logger_level){
+    try {
+        init_files(output_directory_path);
+    } catch(std::runtime_error& init_error) {
+        throw std::runtime_error("Failed to construct an instance of a PLODD multi_file_logger named " + logger_name + " because it was unable to open files under the path, \"" + output_directory_path + "\".");
+    }
 }
 
 multi_file_logger::multi_file_logger(std::string logger_name, logging_level logger_level) : base_logger(logger_name, logger_level){}

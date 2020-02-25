@@ -6,7 +6,7 @@
 #include <PLODD/basic/console_logger.h>
 #include <PLODD/basic/collection.h>
 #include <PLODD/basic/both.h>
-#include <PLODD/time.hpp>
+#include <PLODD/basic/time.hpp>
 #include <PLODD/basic/ostream_logger.h>
 
 void test_file_logging(){

@@ -5,7 +5,7 @@
 //----------------------------------INCLUDES----------------------------------//
 #include <PLODD/basic/ostream_logger.h>
 
-#include <PLODD/time.hpp>
+#include <PLODD/basic/time.hpp>
 //------------------------------OSTREAM_LOGGER--------------------------------//
 namespace pld {
 

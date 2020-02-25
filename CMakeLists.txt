@@ -47,11 +47,13 @@ endif()
 
 #BEFORE_RELEASE: Remove these options.
 target_compile_options(PLODD
-    PRIVATE "-Wextra"
+	PRIVATE "-Wall"
+	PRIVATE "-Wextra"
     PRIVATE "-Werror"
 )
 if(BUILD_PLODD_EXAMPLE)
 	target_compile_options(PLODD_example
+		PRIVATE "-Wall"
 		PRIVATE "-Wextra"
 		PRIVATE "-Werror"
 	)

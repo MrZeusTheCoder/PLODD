@@ -12,10 +12,11 @@ namespace pld {
 
 class single_file_logger : public base_logger {
     private:
-        std::ofstream out_file;
-        void init_file(std::string path);
+        std::ofstream output_file;
     public:
-        single_file_logger(std::string path, std::string logger_name, logging_level logger_level);
+        single_file_logger(std::string output_path, std::string logger_name, logging_level logger_level);
+        single_file_logger(std::string logger_name, logging_level logger_level);
+        void init_file(std::string output_path);
         void debug(std::string msg);
         void info(std::string msg);
         void warn(std::string msg);

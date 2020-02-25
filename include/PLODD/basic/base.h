@@ -17,20 +17,22 @@
 #endif
 //---------------------------------PLODD_BASE---------------------------------//
 namespace pld {
+
 namespace colours {
-//---------------------------COLOURS---------------------------//
 //Notice how most of these are bold. I wanted them most of them to be bold, 
 //but didn't want to write white_bold and red_bold all the time. It isn't 
-//laziness, it's abstraction :D
+//laziness, it's... abstraction? :D
 const std::string reset =  "\033[0m";
 const std::string gray = "\033[0;37m";
 const std::string white = "\033[1;37m";
 const std::string yellow = "\033[1;33m";
 const std::string red = "\033[1;31m";
-//Reverse video escape code:
 const std::string reverse_vid = "\033[7m";
 } //colours
-//-----------------------LOGGING_LEVELS------------------------//
+
+//////////////////////////////////////////////////////////////////////
+/// @brief THE logging levels that define the volume at which you want to yell things.
+//////////////////////////////////////////////////////////////////////
 enum class level {
     DEBUG, //No one need that, right?
     INFO, //Helpful.
@@ -38,16 +40,22 @@ enum class level {
     ERROR, //Oh no, he has broken through our polymorphic xkcd defenses!
 };
 
-//////////////////////////////////////////////////////////////////////
-/// @brief A using-alias for nicer API.
-/// This using-alias allows for nice API yet gives logging_level
-/// for use inside the logging namespace (i.e. void
-/// set_level(logging_level new_level);) making it somewhat
-/// easier to read the source code.
-//////////////////////////////////////////////////////////////////////
-using logging_level = level; //I.e [using namespace pld] logging_level::[da-level]
 
-//level_name() gets the respective names of the levels.
+//////////////////////////////////////////////////////////////////////
+/// @brief A using-alias that allows code wrapped in the pld namespace to be more clear.
+/// 
+/// @details The intent of this using alias is not to be used in any scope other than in the pld namespace.
+/// This basically means that it is more clear to say, "void set_level(level new_level)" rather than
+/// "void set_level(logging_level new_level);", which IMHO is easier to read.
+//////////////////////////////////////////////////////////////////////
+using logging_level = level;
+
+//////////////////////////////////////////////////////////////////////
+/// @brief A simple function that converts a
+/// 
+/// @param level 
+/// @return std::string 
+//////////////////////////////////////////////////////////////////////
 std::string level_name(logging_level level);
 
 class base_logger {
