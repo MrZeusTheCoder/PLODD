@@ -36,7 +36,7 @@ namespace pld {
 ///
 //////////////////////////////////////////////////////////////////////
 class multi_file_logger : public base_logger {
-    private:
+    protected:
         std::ofstream main_file;
         std::ofstream debug_file;
         std::ofstream error_file;

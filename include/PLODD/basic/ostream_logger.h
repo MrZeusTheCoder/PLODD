@@ -19,7 +19,7 @@
 namespace pld {
 
 class ostream_logger : public base_logger {
-    private:
+    protected:
         std::ostream * stream_ptr;
     public:
         ostream_logger(std::ostream * stream_ptr, std::string logger_name, logging_level logger_level);

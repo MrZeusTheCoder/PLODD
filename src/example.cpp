@@ -45,8 +45,6 @@ void test_both_logging(){
 }
 
 
-
-
 int main(){
     /*
     //BEFORE_NEXT_RELEASE: Add check for existence of directory and make if not there, THEN init file logger in there.
@@ -54,11 +52,7 @@ int main(){
     std::cout << "Testing PLODD...\n";
     std::cout << "Testing file logger...\n";
     test_file_logging();
-    */
     test_console_logging();
-    test_both_logging();
-    /*
-    std::cout << "Testing \"both\" logger...\n";
     test_both_logging();
     */
 }

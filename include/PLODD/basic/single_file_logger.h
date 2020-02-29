@@ -11,7 +11,7 @@
 namespace pld {
 
 class single_file_logger : public base_logger {
-    private:
+    protected:
         std::ofstream output_file;
     public:
         single_file_logger(std::string output_path, std::string logger_name, logging_level logger_level);

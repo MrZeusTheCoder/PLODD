@@ -17,6 +17,7 @@ set(lib_sources
 	src/basic/single_file_logger.cpp
 	src/basic/ostream_logger.cpp
 	src/basic/uf_ostream_logger.cpp
+	src/ts/ostream_logger.cpp
 )
 
 if(BUILD_SHARED_LIBS)
