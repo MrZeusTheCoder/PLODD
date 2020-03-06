@@ -29,7 +29,13 @@
 namespace pld {
 namespace ts {
 
-//Generating the time is expensive, so you just check if the elapsed seconds (since 1970... whatever) have changed,
+//TODO: Maybe use fmt::compile for some compile strings.
+//These are ISO. It is the international standard, so suck it up.
+const char * time_format = "{hour}:{minute}:{second}";
+//Year = 0, month = 1, day = 2.
+const char * date_format = "{year}-{month}-{day}";
+
+//Generating the time is expensive, so you just check if the elapsed seconds (since 1970 something) have changed,
 //and if it hasn't use the old one.
 static time_t last_read_time = 0;
 static std::string last_generated_time;
@@ -45,12 +51,12 @@ static std::mutex LGD_mutex;
     inline std::string get_time(){
         SYSTEMTIME local_time;
         GetLocalTime(&local_time);
-        return fmt::format("{}:{}:{}", local_time.wHour, local_time.wMinute, local_time.wSecond);
+        return fmt::format(time_format, fmt::arg("hour", local_time.wHour), fmt::arg("minute", local_time.wMinute), fmt::arg("second", local_time.wSecond));
     }
     inline std::string get_date(){
         SYSTEMTIME local_time;
         GetLocalTime(&local_time);
-        return fmt::format("{}-{}-{}", local_time.wYear, local_time.wMonth, local_time.wDay);
+        return fmt::format(date_format, fmt::arg("year", local_time.wYear), fmt::arg("month", local_time.wMonth), fmt::arg("second", local_time.wDay));
     }
 #else
     inline std::string get_time(){
@@ -62,11 +68,13 @@ static std::mutex LGD_mutex;
             return last_generated_time;
         } else {
             tm* timely = std::localtime(&tea_time);
-            last_generated_time = fmt::format("{}:{}:{}", timely->tm_hour, timely->tm_min, timely->tm_sec);
+            last_generated_time = fmt::format(time_format, fmt::arg("hour", timely->tm_hour), fmt::arg("minute", timely->tm_min), fmt::arg("second", timely->tm_sec));
             last_read_time = tea_time;
             return last_generated_time;
         }
     }
+    //This isn't super optimized, but I doubt it will be called hugely.
+    //Don't prove me wrong, :P.
     inline std::string get_date(){
         std::lock_guard<std::mutex> LRT_guard(LRT_mutex);
         std::lock_guard<std::mutex> LGD_guard(LGD_mutex);
@@ -76,7 +84,7 @@ static std::mutex LGD_mutex;
             return last_generated_date;
         } else {
             tm* timely = std::localtime(&tea_time);
-            last_generated_date = fmt::format("{}-{}-{}", (timely->tm_year + 1900), (timely->tm_mon + 1), (timely->tm_mday));
+            last_generated_date = fmt::format(date_format, fmt::arg("year", (timely->tm_year + 1900)), fmt::arg("month", timely->tm_mon + 1), fmt::arg("day", (timely->tm_mday)));
             last_read_time = tea_time;
             return last_generated_date;
         }

@@ -36,7 +36,7 @@ void single_file_logger::info(std::string msg){
 }
 
 void single_file_logger::warn(std::string msg){
-    if(logger_level == logging_level::WARN){
+    if(logger_level <= logging_level::WARN){
         output_file << "[" << get_time() << "]:" << logger_name << ":WARN:" << msg << std::endl;
     }
 }
