@@ -24,7 +24,6 @@ namespace pld {
 //////////////////////////////////////////////////////////////////////
 /// @brief A multi-file file logger that logs to three 
 /// files.
-/// 
 /// @details A multi-sink file logger that outputs into three files:
 /// "debug.log", "main.log", and "errors.log". "debug.log" is
 /// written all logs no matter the logging level that is set on a
@@ -43,7 +42,6 @@ class multi_file_logger : public base_logger {
     public:
         //////////////////////////////////////////////////////////////////////
         /// @brief Constructs a new multi-file logger object and initializes the output files.
-        /// 
         /// @param output_directory_path The path to the directory where the output files are placed
         /// @param logger_name The name of the logger.
         /// @param logger_level The minimum logging level at which the logger will write output.
@@ -51,7 +49,6 @@ class multi_file_logger : public base_logger {
         multi_file_logger(std::string output_directory_path, std::string logger_name, logging_level logger_level);
         //////////////////////////////////////////////////////////////////////
         /// @brief Constructs a new multi-file logger object, without initalizing the output files.
-        /// 
         /// @param logger_name The name of the logger.
         /// @param logger_level The minimum logging level at which the logger will write output.
         //////////////////////////////////////////////////////////////////////
