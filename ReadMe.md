@@ -1,6 +1,6 @@
 # PLODD - Pong++'s Logging Object Declarations and Definitions:
 
-> WARNING: PLOOD was/is ment for personal use. It is not recommended for use outside of a quick test. (I don't really know what I am doing :P.)
+> WARNING: This ReadMe isn't up to date at all! Check the TODO list, it's on there :{
 
 PLODD (pronounced the same way as the word *plod*) is an implementation of the logging library used in my game Pong++ (Coming Soon). PLODD is meant to be light-weight, easy to use, and easy to incorporate into your project. It's logging "look" is as follows:
 

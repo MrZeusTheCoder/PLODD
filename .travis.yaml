@@ -1,0 +1,30 @@
+language: cpp
+
+branches:
+    only:
+        - master
+        - travis_test
+
+addons:
+    apt_packages:
+        - clang
+        - cmake
+        - g++
+
+before_script:
+    - mkdir build && cd build
+    - cmake .. -DBUILD_PLODD_EXAMPLE=1 -DBUILD_PLODD_TESTS=1 -DBUILD_PLODD_BENCHMARKS=1
+
+script:
+    - cmake --build .. --parallel 2
+
+matrix:
+    include:
+        - name: "Linux GCC Shared"
+          os: linux
+          dist: xenial
+          compiler: gcc
+        - name: "Linux Clang Shared"
+          os: linux
+          dist: xenial
+          compiler: clang

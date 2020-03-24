@@ -12,7 +12,7 @@
 #ifndef PLODD_TS_OSTREAM_LOGGER_H_
 #define PLODD_TS_OSTREAM_LOGGER_H_
 //----------------------------------INCLUDES----------------------------------//
-#include "base.h"
+#include "../basic/base.h"
 
 #include <iostream>
 #include <string>

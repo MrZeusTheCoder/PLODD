@@ -8,13 +8,73 @@
 #include <sstream>
 #include <regex>
 
-#include <catch2/catch.hpp>
+#define CATCH_CONFIG_MAIN 1
+#include <catch-mini/catch-mini.hpp>
 //----------------------------OSTREAM_LOGGER_TEST-----------------------------//
 using namespace pld;
+
+//------------------------TEST_OBJECTS-------------------------//
+std::stringstream output_stream;
 
 const std::regex PLODD_log_regex("(.*):(.*):(.*):(.*)");
 const std::regex time_regex("\\[(?:.+):(?:.+):(?:.+)\\]");
 
+//--------------------TEST_HELPER_FUNCTIONS--------------------//
+bool test_log_fmt(std::string log_string, logging_level log_level);
+
+int test_formatted_logger(ostream_logger& logger);
+
+inline void clear_sstream(std::stringstream& stream){
+    stream = std::stringstream();
+}
+
+//-------------------------TEST_CASES--------------------------//
+TEST_CASE("Construction works properly"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::DEBUG);
+    REQUIRE(output_stream.str() == ""); //Make sure the output stream was untouched during ctor.
+    REQUIRE(logger.get_name() == "TEST_LOGGER");
+    REQUIRE(logger.get_level() == level::DEBUG);
+}
+
+TEST_CASE("Name setting works"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::DEBUG);
+    logger.set_name("NEW_NAME");
+    REQUIRE(logger.get_name() == "NEW_NAME");
+}
+
+TEST_CASE("Level setting works"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::ERROR);
+    logger.set_level(level::DEBUG);
+    REQUIRE(logger.get_level() == level::DEBUG);
+    //TODO: Are these redundent?
+    logger.set_level(level::INFO);
+    REQUIRE(logger.get_level() == level::INFO);
+    logger.set_level(level::WARN);
+    REQUIRE(logger.get_level() == level::WARN);
+    logger.set_level(level::ERROR);
+    REQUIRE(logger.get_level() == level::ERROR);
+}
+
+TEST_CASE("Debug log is properly formed and prints correct number of logs"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::DEBUG);
+    REQUIRE(test_formatted_logger(logger) == 4);
+}
+
+TEST_CASE("Info log is properly formed and prints correct number of logs"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::INFO);
+    REQUIRE(test_formatted_logger(logger) == 3);
+}
+
+TEST_CASE("Warn log is properly formed and prints correct number of logs"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::WARN);
+    REQUIRE(test_formatted_logger(logger) == 2);
+}
+
+TEST_CASE("Error log is properly formed and prints correct number of logs"){
+    ostream_logger logger(&output_stream, "TEST_LOGGER", level::ERROR);
+    REQUIRE(test_formatted_logger(logger) == 1);
+}
+//----------------------HELPER_FUNCTION_IMPLEMENTATIONS-----------------------//
 bool test_log_fmt(std::string log_string, logging_level log_level){
     //std::string log_string = log_stream.str(); //Strings passed into regex functions must not be temp strings, thus this line.
     unsigned int test_sum = 0;
@@ -41,10 +101,6 @@ bool test_log_fmt(std::string log_string, logging_level log_level){
     }
 }
 
-inline void clear_sstream(std::stringstream& stream){
-    stream = std::stringstream();
-}
-
 int test_formatted_logger(ostream_logger& logger){
     std::stringstream logger_output;
     logger.set_stream(&logger_output);
@@ -65,37 +121,4 @@ int test_formatted_logger(ostream_logger& logger){
     clear_sstream(logger_output);
     //
     return checks_passed;
-}
-
-SCENARIO("Someone needs a working formatted ostream logger", "[ostream_logger]"){
-    GIVEN("A formatted ostream logger and a stringstream"){
-        std::stringstream output_stream;
-        ostream_logger logger(&output_stream, "TEST_LOGGER", level::DEBUG);
-
-        REQUIRE(output_stream.str() == ""); //Make sure the output stream was untouched during ctor.
-        REQUIRE(logger.get_name() == "TEST_LOGGER");
-        REQUIRE(logger.get_level() == level::DEBUG);
-        logger.set_level(level::INFO);
-
-        WHEN("The level is at DEBUG"){
-            logger.set_level(level::DEBUG);
-            REQUIRE(logger.get_level() == level::DEBUG);
-            REQUIRE(test_formatted_logger(logger) == 4);
-        }
-        WHEN("The level is at INFO"){
-            logger.set_level(level::INFO);
-            REQUIRE(logger.get_level() == level::INFO);
-            REQUIRE(test_formatted_logger(logger) == 3);
-        }
-        WHEN("The level is at WARN"){
-            logger.set_level(level::WARN);
-            REQUIRE(logger.get_level() == level::WARN);
-            REQUIRE(test_formatted_logger(logger) == 2);
-        }
-        WHEN("The level is at ERROR"){
-            logger.set_level(level::ERROR);
-            REQUIRE(logger.get_level() == level::ERROR);
-            REQUIRE(test_formatted_logger(logger) == 1);
-        }
-    }
 }
