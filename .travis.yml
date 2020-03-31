@@ -1,0 +1,44 @@
+language: cpp
+
+notifications:
+    email: false
+
+git:
+    depth: 1
+
+branches:
+    only:
+        - master
+        - travis_test
+        - travis_quick_test
+
+addons:
+    apt_packages:
+        - cmake
+
+before_script:
+    - mkdir build && cd build
+    - cmake .. -DBUILD_SHARED_LIBS=1 -DPLODD_BUILD_EXAMPLE=1 -DPLODD_BUILD_TESTS=1 -DPLODD_BUILD_BENCHMARKS=1
+
+script:
+    - cmake --build . --parallel 2
+
+after_script:
+    - ctest -VV
+
+matrix:
+    include:
+        - name: "Linux GCC Dynamic"
+          os: linux
+          dist: xenial
+          compiler: gcc
+        - name: "Linux Clang Dynamic"
+          os: linux
+          dist: xenial
+          compiler: clang
+        - name: "Windows 10 Dynamic"
+          os: windows
+        - name: "XCode 10 Dynamic"
+          os: osx
+          osx_image: xcode10
+          

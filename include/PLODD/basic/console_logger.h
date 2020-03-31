@@ -13,7 +13,7 @@
 namespace pld {
 
 //Exposes a console logger for use like so: "logging::console.info("p1z h4z m3 m0n3y... p1z?");"
-extern ostream_logger console;
+extern PLODD_API ostream_logger console;
 
 } //pld
 //-----------------------------------END_IF-----------------------------------//

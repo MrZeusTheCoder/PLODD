@@ -11,7 +11,7 @@
 namespace pld {
 
 //Exposes a file logger for use like so: "logging::file.info("fake, helpful info.");"
-extern multi_file_logger file;
+extern PLODD_API multi_file_logger file;
 
 } //pld
 //-----------------------------------END_IF-----------------------------------//

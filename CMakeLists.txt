@@ -6,10 +6,10 @@ project(PLODD VERSION 0.0.0 LANGUAGES CXX)
 ########################################
 #         PLODD BUILD OPTIONS          #
 ########################################
-option(BUILD_PLODD_EXAMPLE "Build the PLODD example code file." ON)
-option(BUILD_PLODD_DOCS "Build the Doxygen PLODD documentation." OFF)
-option(BUILD_PLODD_TESTS "Build tests for PLODD" OFF)
-option(BUILD_PLODD_BENCHMARKS "Build benchmarks for some PLODD objects" OFF)
+option(PLODD_BUILD_EXAMPLE "Build the PLODD example code file." ON)
+option(PLODD_BUILD_DOCS "Build the Doxygen PLODD documentation." OFF)
+option(PLODD_BUILD_TESTS "Build tests for PLODD" OFF)
+option(PLODD_BUILD_BENCHMARKS "Build benchmarks for some PLODD classes" OFF)
 
 ########################################
 #      PLODD MODULAR BUILD SYSTEM      #
@@ -95,43 +95,55 @@ foreach(module ${extra_modules})
 	endif()
 endforeach(module ${extra_modules})
 
+########################################
+function(add_warnings target)
+	target_compile_options(${target} PRIVATE
+		$<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+			-Werror
+			-Wall
+			-Wextra
+		>
+		$<$<CXX_COMPILER_ID:MSVC>:
+			/WX
+			/W3
+		>
+	)
+endfunction(add_warnings target)
+
+
+
+########################################
+#            BUILD TARGETS             #
+########################################
 
 if(BUILD_SHARED_LIBS)
 	add_library(PLODD SHARED ${lib_sources})
-	target_include_directories(PLODD PRIVATE include)
-	set_target_properties(PLODD PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/PLODD/lib)
+	target_compile_definitions(PLODD PRIVATE -DPLODD_SHARED -DPLODD_EXPORT_API)
 else()
 	add_library(PLODD STATIC ${lib_sources})
-	target_include_directories(PLODD PRIVATE include)
-	set_target_properties(PLODD PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/PLODD/lib)
+	target_compile_definitions(PLODD PRIVATE -DPLODD_STATIC)
 endif()
 
-if(BUILD_PLODD_EXAMPLE)
+target_include_directories(PLODD PRIVATE include)
+target_compile_features(PLODD PUBLIC cxx_std_11)
+add_warnings(PLODD)
+set_target_properties(PLODD PROPERTIES ENABLE_EXPORTS ON)
+set_target_properties(PLODD PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/PLODD/lib)
+
+if(PLODD_BUILD_EXAMPLE)
 	add_executable(PLODD_example src/example.cpp)
 	target_include_directories(PLODD_example PRIVATE include)
 	target_link_libraries(PLODD_example PLODD)
+	add_warnings(PLODD_example)
 	set_target_properties(PLODD_example PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/PLODD/bin)
 endif()
 
-if(BUILD_PLODD_TESTS)
+if(PLODD_BUILD_TESTS)
 	enable_testing()
 	add_subdirectory(tests)
 endif()
 
-if(BUILD_PLODD_BENCHMARKS)
+if(PLODD_BUILD_BENCHMARKS)
 	add_subdirectory(benchmarking)
 endif()
 
-#BEFORE_RELEASE: Remove these options.
-target_compile_options(PLODD
-	PRIVATE "-Wall"
-	PRIVATE "-Wextra"
-    PRIVATE "-Werror"
-)
-if(BUILD_PLODD_EXAMPLE)
-	target_compile_options(PLODD_example
-		PRIVATE "-Wall"
-		PRIVATE "-Wextra"
-		PRIVATE "-Werror"
-	)
-endif()

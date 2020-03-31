@@ -8,7 +8,7 @@
 //-------------------------UNFORMATTED_OSTREAM_LOGGER-------------------------//
 namespace pld {
 
-class uf_ostream_logger : public base_logger {
+class PLODD_API uf_ostream_logger : public base_logger {
     private:
         std::ostream * stream_ptr;
     public:

@@ -34,7 +34,7 @@ namespace pld {
 /// logging level.
 ///
 //////////////////////////////////////////////////////////////////////
-class multi_file_logger : public base_logger {
+class PLODD_API multi_file_logger : public base_logger {
     protected:
         std::ofstream main_file;
         std::ofstream debug_file;

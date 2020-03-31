@@ -12,7 +12,7 @@
 //------------------------------------BOTH------------------------------------//
 namespace pld {
 
-class both_logger : public base_logger {
+class PLODD_API both_logger : public base_logger {
     public:
         both_logger() : base_logger("BOTH", logging_level::ERROR){};
         void set_level(logging_level new_level);
@@ -23,7 +23,7 @@ class both_logger : public base_logger {
         void error(std::string msg);
 };
 
-extern both_logger both;
+extern PLODD_API both_logger both;
 
 } //pld
 //-----------------------------------END_IF-----------------------------------//

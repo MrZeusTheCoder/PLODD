@@ -18,7 +18,7 @@
 //-------------------------------OSTREAM_LOGGER-------------------------------//
 namespace pld {
 
-class ostream_logger : public base_logger {
+class PLODD_API ostream_logger : public base_logger {
     protected:
         std::ostream * stream_ptr;
     public:

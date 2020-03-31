@@ -44,7 +44,7 @@ bool dir_exists(const std::string& path){
 }
 
 bool make_dir(const std::string& path){
-    if(CreateDirectory(path.c_str())){
+    if(CreateDirectory(path.c_str(), NULL)){
         return true;
     } else {
         return false;

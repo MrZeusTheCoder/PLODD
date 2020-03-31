@@ -14,7 +14,7 @@ unsigned int time_log_string(pld::base_logger * logger, int sample_size){
         logger->debug(_64_null_str);
     }
     sc::time_point end = sc::now();
-    return c::duration_cast<c::nanoseconds>((end - start) / sample_size).count();
+    return static_cast<unsigned int>(c::duration_cast<c::nanoseconds>((end - start) / sample_size).count());
 }
 
 class null_stream : public std::ostream {

@@ -23,7 +23,7 @@ namespace pld {
 //if it is hard to read, but I have included the full length versions as comments
 
 template<typename T = base_logger>
-class collection : public base_logger {
+class PLODD_API collection : public base_logger {
     //Type away, whatever your name is!
     typedef T* T_ptr;
     typedef const T* const_T_ptr;

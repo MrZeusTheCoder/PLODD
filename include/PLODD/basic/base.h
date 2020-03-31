@@ -11,10 +11,30 @@
 //----------------------------DEFINES_AND_STUFFING----------------------------//
 #ifdef _WIN32
     #undef ERROR //Windows employee: "Why? Why not? Also, I took an online test that said I was a sadist, but that's unimportant."
-    //^^^^^^^^^^ This will undefine any use of the word ERROR. This word is used throughout PLODD. :|
+    //^^^^^^^^^^ This will undefine any use of the word ERROR. This word is used throughout PLODD. :(
     #define NOMINMAX 1 //I like the "1". Feels more explicit.
     #define PLODD_NO_ANSI 1
 #endif
+
+//PLODD_API for shared libs.
+#ifndef PLODD_STATIC
+    #ifdef _WIN32
+        #ifdef PLODD_EXPORT_API
+            #define PLODD_API __declspec(dllexport)
+        #else
+            #define PLODD_API __declspec(dllimport)
+        #endif
+
+        #ifdef _MSC_VER
+            #pragma warning(disable: 4251)
+        #endif
+    #else
+        #define PLODD_API 
+    #endif
+#else
+    #define PLODD_API 
+#endif
+
 //---------------------------------PLODD_BASE---------------------------------//
 namespace pld {
 
@@ -33,7 +53,7 @@ const std::string reverse_vid = "\033[7m";
 //////////////////////////////////////////////////////////////////////
 /// @brief The logging levels that define the volume at which you want to yell things.
 //////////////////////////////////////////////////////////////////////
-enum class level {
+enum class PLODD_API level {
     DEBUG, //No one need that, right?
     INFO, //Helpful.
     WARN, //Calm down, it'll be fine.
@@ -57,12 +77,12 @@ using logging_level = level;
 /// @see pld::logging_level
 /// @see pld::level
 //////////////////////////////////////////////////////////////////////
-std::string level_name(logging_level level);
+PLODD_API std::string level_name(logging_level level);
 
 //////////////////////////////////////////////////////////////////////
 /// @brief The abstract class all PLODD-compatible loggers inherit from.
 //////////////////////////////////////////////////////////////////////
-class base_logger {
+class PLODD_API base_logger {
     protected:
         //////////////////////////////////////////////////////////////////////
         /// @brief The name of the logger.

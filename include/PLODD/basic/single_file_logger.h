@@ -10,8 +10,8 @@
 //-----------------------------SINGLE-FILE_LOGGER-----------------------------//
 namespace pld {
 
-class single_file_logger : public base_logger {
-    protected:
+class PLODD_API single_file_logger : public base_logger {
+    private:
         std::ofstream output_file;
     public:
         single_file_logger(std::string output_path, std::string logger_name, logging_level logger_level);

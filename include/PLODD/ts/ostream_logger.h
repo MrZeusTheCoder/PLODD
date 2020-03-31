@@ -30,9 +30,9 @@ struct shared_stream_mutex {
     //The mutex pointed to is actually heaped by the ostream_logger ctor.
     std::mutex * mutex;
     //Technically only allows for 256 loggers. Who would do something like that... Hey, look a new issue... oh..
-    u_int8_t dependents;
+    uint8_t dependents;
     shared_stream_mutex() = delete;
-    shared_stream_mutex(std::ostream * stream_ptr, std::mutex * mutex_ptr, u_int8_t dependents) : stream_ptr(stream_ptr), mutex(mutex_ptr), dependents(dependents){}
+    shared_stream_mutex(std::ostream * stream_ptr, std::mutex * mutex_ptr, uint8_t dependents) : stream_ptr(stream_ptr), mutex(mutex_ptr), dependents(dependents){}
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ struct shared_stream_mutex {
 /// nonetheless.
 /// @see pld::ostream_logger
 //////////////////////////////////////////////////////////////////////
-class ostream_logger : public base_logger {
+class PLODD_API ostream_logger : public base_logger {
     protected:
         //Lists
         static std::list<shared_stream_mutex> shared_mutex_list;

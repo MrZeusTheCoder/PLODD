@@ -7,8 +7,8 @@
 //--------------------------------LOGGING_BASE--------------------------------//
 namespace pld {
 //-------------------------LEVEL_NAME--------------------------//
-std::string level_name(logging_level level){
-    switch(level){
+std::string level_name(logging_level passed_level){
+    switch(passed_level){
         default:
             return std::string("ERROR");
         case level::DEBUG:
