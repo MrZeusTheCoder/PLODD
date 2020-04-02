@@ -6,11 +6,6 @@ notifications:
 git:
     depth: 1
 
-branches:
-    only:
-        - master
-        - travis_test
-
 addons:
     apt_packages:
         - cmake
