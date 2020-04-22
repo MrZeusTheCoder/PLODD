@@ -1,4 +1,4 @@
-//  Copyright (C) Elijah Hopp 2019, All Rights Reserved.
+//  Copyright (C) Elijah Hopp 2020, No Rights Reserved.
 //
 //  A class that allows you to log to both the console and the files.
 // 

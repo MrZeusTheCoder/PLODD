@@ -25,14 +25,14 @@ namespace ts {
 //////////////////////////////////////////////////////////////////////
 /// @brief An internal use type for locking ostream objects in the ts::ostream_logger.
 //////////////////////////////////////////////////////////////////////
-struct shared_stream_mutex {
+struct _shared_stream_mutex {
     std::ostream * stream_ptr;
     //The mutex pointed to is actually heaped by the ostream_logger ctor.
     std::mutex * mutex;
     //Technically only allows for 256 loggers. Who would do something like that... Hey, look a new issue... oh..
     uint8_t dependents;
-    shared_stream_mutex() = delete;
-    shared_stream_mutex(std::ostream * stream_ptr, std::mutex * mutex_ptr, uint8_t dependents) : stream_ptr(stream_ptr), mutex(mutex_ptr), dependents(dependents){}
+    _shared_stream_mutex() = delete;
+    _shared_stream_mutex(std::ostream * stream_ptr, std::mutex * mutex_ptr, uint8_t dependents) : stream_ptr(stream_ptr), mutex(mutex_ptr), dependents(dependents){}
 };
 
 //////////////////////////////////////////////////////////////////////
@@ -46,11 +46,12 @@ struct shared_stream_mutex {
 //////////////////////////////////////////////////////////////////////
 class PLODD_API ostream_logger : public base_logger {
     protected:
-        //Lists
-        static std::list<shared_stream_mutex> shared_mutex_list;
-        static std::mutex vector_mutex;
-        std::ostream * obj_stream_ptr;
-        shared_stream_mutex * obj_shared_mutex;
+        //Static:
+        static std::list<_shared_stream_mutex> shared_mutex_list;
+        static std::mutex vector_locking_mutex;
+        //Per-object:
+        std::ostream * stream_ptr;
+        _shared_stream_mutex * shared_ostream_mutex;
     public:
         ostream_logger(std::ostream * stream_pointer);
         ~ostream_logger();

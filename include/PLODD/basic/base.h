@@ -1,4 +1,4 @@
-//  Copyright (C) Elijah Hopp 2019, All Rights Reserved.
+//  Copyright (C) Elijah Hopp 2020, No Rights Reserved.
 //
 //  This file provides the needed base needs for any loggers.
 // 

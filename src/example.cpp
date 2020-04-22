@@ -10,6 +10,7 @@
 #include <PLODD/basic/both.h>
 #include <PLODD/basic/time.hpp>
 #include <PLODD/basic/ostream_logger.h>
+#include <PLODD/basic/multi_file_logger.h>
 //---------------------------------FUNCTIONS----------------------------------//
 //TODO: Find a place for this filesystem code:
 //Directory existence checker:

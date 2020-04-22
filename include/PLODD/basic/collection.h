@@ -1,4 +1,4 @@
-//  Copyright (C) Elijah Hopp 2019, All Rights Reserved.
+//  Copyright (C) Elijah Hopp 2020, No Rights Reserved.
 //
 //  Collections! An std::vector for loggers! What a newfound principal!
 //  (sarcasm kills us on the inside, yet humans find this masochistically...

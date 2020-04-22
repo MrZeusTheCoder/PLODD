@@ -1,4 +1,4 @@
-//  Copyright (C) Elijah Hopp 2019, All Rights Reserved.
+//  Copyright (C) Elijah Hopp 2020, No Rights Reserved.
 //
 //  Logggggggggssss tostd::coutcuzwhynot? Haz me c0ff33. p1z I h4z n33d
 //  m0n3y. d0n4t3 n0w.

@@ -15,11 +15,26 @@
 #include "base.h"
 
 #include <fstream>
+#include <list>
 #include <string>
 
 #include "single_file_logger.h"
 //-----------------------------MULTI-FILE_LOGGER------------------------------//
 namespace pld {
+
+class _shared_mf_handle {
+    public:
+        std::string path;
+        std::ofstream main_file;
+        std::ofstream debug_file;
+        std::ofstream error_file;
+        uint8_t dependents;
+        //
+        void init_files();
+        //
+        _shared_mf_handle() = delete;
+        _shared_mf_handle(std::string path, uint8_t dependents) : path(path), dependents(dependents){}
+};
 
 //////////////////////////////////////////////////////////////////////
 /// @brief A multi-file file logger that logs to three 
@@ -35,10 +50,11 @@ namespace pld {
 ///
 //////////////////////////////////////////////////////////////////////
 class PLODD_API multi_file_logger : public base_logger {
-    protected:
-        std::ofstream main_file;
-        std::ofstream debug_file;
-        std::ofstream error_file;
+    public:
+        //Static list of file handles:
+        static std::list<_shared_mf_handle> shared_file_handle_list;
+        //
+        _shared_mf_handle * shared_file_handles;
     public:
         //////////////////////////////////////////////////////////////////////
         /// @brief Constructs a new multi-file logger object and initializes the output files.
@@ -47,14 +63,10 @@ class PLODD_API multi_file_logger : public base_logger {
         /// @param logger_level The minimum logging level at which the logger will write output.
         //////////////////////////////////////////////////////////////////////
         multi_file_logger(std::string output_directory_path, std::string logger_name, logging_level logger_level);
-        //////////////////////////////////////////////////////////////////////
-        /// @brief Constructs a new multi-file logger object, without initalizing the output files.
-        /// @param logger_name The name of the logger.
-        /// @param logger_level The minimum logging level at which the logger will write output.
-        //////////////////////////////////////////////////////////////////////
-        multi_file_logger(std::string logger_name, logging_level logger_level);
+        ~multi_file_logger();
         
-        void init_files(std::string directory_path);
+        void clear_files();
+
         void debug(std::string msg);
         void info(std::string msg);
         void warn(std::string msg);
