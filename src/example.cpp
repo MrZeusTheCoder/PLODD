@@ -116,8 +116,7 @@ int main(){
     //Opens the files for logging:
     pld::file.init_files("./test_logs/");
     //All non-internal loggers must be constructed manually:
-    pld::single_file_logger example_sf_logger("PLODD_SINGLE_FILE_LOGGER", pld::level::INFO);
-    example_sf_logger.init_file("./test_logs/single_file.log");
+    pld::single_file_logger example_sf_logger("./test_logs/single_file.log", "PLODD_SINGLE_FILE_LOGGER", pld::level::INFO);
     //
     std::cout << fmt::format("//{:-^80}//\n", "MULTI-FILE-LOGGING-EXAMPLE");
     std::cout << "Testing out the internally instantiated multi-file file logger (pld::file)...\n(Check the \"test_logs\" directory.)\n";

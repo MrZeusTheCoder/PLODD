@@ -87,11 +87,7 @@ multi_file_logger::multi_file_logger(std::string out_dp, std::string logger_name
     shared_file_handles = find_or_add_shared_handle(out_dp, shared_file_handle_list);
     //
     if(!shared_file_handles->main_file.is_open()){
-        try {
-            shared_file_handles->init_files();
-        } catch(std::exception& init_error) {
-            throw std::runtime_error("Failed to construct an instance of a PLODD multi-file logger.\nUpstream error is:" + static_cast<std::string>(init_error.what()));
-        }
+        shared_file_handles->init_files();
     }
 }
 

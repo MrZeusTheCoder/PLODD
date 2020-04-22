@@ -50,7 +50,7 @@ class _shared_mf_handle {
 ///
 //////////////////////////////////////////////////////////////////////
 class PLODD_API multi_file_logger : public base_logger {
-    public:
+    private:
         //Static list of file handles:
         static std::list<_shared_mf_handle> shared_file_handle_list;
         //
