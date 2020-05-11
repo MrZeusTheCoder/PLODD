@@ -40,12 +40,12 @@ class _shared_mf_handle {
 /// @brief A multi-file file logger that logs to three 
 /// files.
 /// @details A multi-sink file logger that outputs into three files:
-/// "debug.log", "main.log", and "errors.log". "debug.log" is
+/// `debug.log`, `main.log`, and `errors.log`. `debug.log` is
 /// written all logs no matter the logging level that is set on a
-/// per-logger basis. "main.log" is only written all the logs of
-/// equal or greater logging level. i.e. only WARNING and ERROR if
-/// the level is set to WARNING and not INFO and DEBUG.
-/// "errors.log" is only written logs that are of the ERROR
+/// per-logger basis. `main.log` is only written all the logs of
+/// equal or greater logging level. i.e. only `WARNING` and `ERROR` if
+/// the level is set to `WARNING` and not `INFO` and `DEBUG`.
+/// `errors.log` is only written logs that are of the `ERROR`
 /// logging level.
 ///
 //////////////////////////////////////////////////////////////////////

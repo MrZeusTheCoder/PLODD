@@ -65,7 +65,7 @@ enum class PLODD_API level {
 /// @brief A using-alias that allows code wrapped in the pld namespace to be more clear.
 /// @details The intent of this using alias is not to be used in any scope other than in the pld namespace.
 /// This basically means that it is more clear to say, "void set_level(logging_level new_level)" rather than
-/// "void set_level(level new_level);", the first being, IMHO, easier to read.
+/// "void set_level(level new_level);", the first being, IMHO, clearer.
 /// @see pld::level
 //////////////////////////////////////////////////////////////////////
 using logging_level = level;
@@ -80,7 +80,7 @@ using logging_level = level;
 PLODD_API std::string level_name(logging_level level);
 
 //////////////////////////////////////////////////////////////////////
-/// @brief The abstract class all PLODD-compatible loggers inherit from.
+/// @brief The abstract class all PLODD-compliant loggers inherit from.
 //////////////////////////////////////////////////////////////////////
 class PLODD_API base_logger {
     protected:
@@ -145,9 +145,7 @@ class PLODD_API base_logger {
 
         //////////////////////////////////////////////////////////////////////
         /// @brief Gets the name of the logger.
-        ///
         /// @return std::string The name of the logger.
-        ///
         /// @see set_name
         /// @see logger_name
         //////////////////////////////////////////////////////////////////////
@@ -155,9 +153,7 @@ class PLODD_API base_logger {
 
         //////////////////////////////////////////////////////////////////////
         /// @brief Sets the name name of the logger.
-        ///
         /// @param new_name The new name that will be given to the logger.
-        ///
         /// @see get_name
         /// @see logger_name
         //////////////////////////////////////////////////////////////////////
@@ -180,31 +176,31 @@ class PLODD_API base_logger {
         virtual void set_level(logging_level new_level);
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The logger method that handels logs with the log level DEBUG.
+        /// @brief The logger method that handles logs with the log level DEBUG.
         /// @param msg The message to be logged.
         //////////////////////////////////////////////////////////////////////
         virtual void debug(std::string msg) = 0;
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The logger method that handels logs with the log level INFO.
+        /// @brief The logger method that handles logs with the log level INFO.
         /// @param msg The message to be logged.
         //////////////////////////////////////////////////////////////////////
         virtual void info(std::string msg) = 0;
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The logger method that handels logs with the log level WARN.
+        /// @brief The logger method that handles logs with the log level WARN.
         /// @param msg The message to be logged.
         //////////////////////////////////////////////////////////////////////
         virtual void warn(std::string msg) = 0;
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The logger method that handels logs with the log level ERROR.
+        /// @brief The logger method that handles logs with the log level ERROR.
         /// @param msg The message to be logged.
         //////////////////////////////////////////////////////////////////////
         virtual void error(std::string msg) = 0;
         
         //////////////////////////////////////////////////////////////////////
-        /// @brief The formatting aware logger method that handels logs with the log level DEBUG.
+        /// @brief The formatting aware logger method that handles logs with the log level DEBUG.
         /// 
         /// @details This method is essentially a passthrough to the debug 
         /// function. This method's job (and every other formatted debug 
@@ -220,11 +216,12 @@ class PLODD_API base_logger {
         /// @code{.cpp}
         /// pld::console.debugf("{}, world! This my #{}st formmated log!", "Hello", 1);
         /// pld::console.warnf("Warning! This {1} be {0} fun.", "absurdly", "fun");
+        /// pld::console.info("{food} is Jimmy's favourite food!", fmt::arg("food", "Bacon"));
         /// @endcode
         ///
         /// Do notice this is a non-virtual function!
-        /// This means that it will always be what it is. No inheritance
-        /// changes that.
+        /// This means that it will always be what it is. Inheritance will not
+        /// change that.
         ///
         /// @param fmt_str The message containing formatting options that is passed onto the fmt::format function for further processing.
         /// @param fmt_args The packed arguments that are passed onto.
@@ -235,38 +232,81 @@ class PLODD_API base_logger {
         void debugf(std::string fmt_str, const Args&... fmt_args){debug(fmt::format(fmt_str, fmt_args...).c_str());}
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The formatting aware logger method that handels logs with the log level INFO.
+        /// @brief The formatting aware logger method that handles logs with the log level INFO.
         /// @see debugf
         //////////////////////////////////////////////////////////////////////
         template<class... Args>
         void infof(std::string fmt_str, const Args&... fmt_args){info(fmt::format(fmt_str, fmt_args...).c_str());}
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The formatting aware logger method that handels logs with the log level WARN.
+        /// @brief The formatting aware logger method that handles logs with the log level WARN.
         /// @see debugf
         //////////////////////////////////////////////////////////////////////
         template<class... Args>
         void warnf(std::string fmt_str, const Args&... fmt_args){warn(fmt::format(fmt_str, fmt_args...).c_str());}
 
         //////////////////////////////////////////////////////////////////////
-        /// @brief The formatting aware logger method that handels logs with the log level ERROR.
+        /// @brief The formatting aware logger method that handles logs with the log level ERROR.
         /// @see debugf
         //////////////////////////////////////////////////////////////////////
         template<class... Args>
         void errorf(std::string fmt_str, const Args&... fmt_args){error(fmt::format(fmt_str, fmt_args...).c_str());}
 };
-} //pld
-
-//TODO: Add an example inheritance from base_logger.
 
 //////////////////////////////////////////////////////////////////////
 /// @class base_logger
+///
 /// @details The base_logger is the mother of all loggers and contains 
 /// everything a logger needs: a name, a logging level, and a few 
 /// helper functions. Every PLODD-compatible logger is based off this 
 /// logger, and a number of internal PLODD components use the it.
 /// I.e. collections. It also provides log message formatting 
 /// functionality. 
+///
+/// How does one inherit from it you ask?
+///
+/// Examples speak a thousand words:
+///
+/// @code{.cpp}
+/// //A fancy logger that can speak through a set of mechanical larynx.
+/// class voice_box_logger : public pld::base_class {
+///     private:
+///         voco::mechanical_larynx voice_processer;
+///     public:
+///         voice_box_logger(int voice_port, std::string logger_name, pld::level logger_level) : base_logger(logger_name, logger_level){
+///             voice_processer = voco::get_me_some_larynx_baby(voice_port);
+///         }
+/// 
+///         debug(std::string message){
+///             //When to say something must be handled personally:
+///             if(logger_level == pld::level::DEBUG){
+///                 voice_processer.say(message);
+///             }
+///         }
+/// 
+///         info(std::string message){
+///             if(logger_level <= pld::level::INFO){
+///                 voice_processer.say(message);
+///             }
+///         }
+/// 
+///         warn(std::string message){
+///             if(logger_level <= pld::level::WARN){
+///                 voice_processer.say(message);
+///             }
+///         }
+/// 
+///         error(std::string message){
+///             //Errors will always be processed:
+///             voice_processer.say(message);
+///         }
+/// 
+///         //Formatted logs are inherited from, but handled by the base_logger.
+/// };
+/// @endcode
+///
 //////////////////////////////////////////////////////////////////////
+
+} //pld
 //-----------------------------------END_IF-----------------------------------//
 #endif //PLODD_BASE_H_
