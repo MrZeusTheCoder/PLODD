@@ -12,6 +12,18 @@
 //--------------------------------FILE_LOGGER---------------------------------//
 namespace pld {
 
+//A quick, ignoreable class declaration:
+class _mf_logger_singleton : public base_logger {};
+
+//----------------------PLODD_FILE_LOGGER----------------------//
+////////////////////////////////////////////////////////////////////////////////
+/// @brief The internal file PLODD file logger.
+/// 
+////////////////////////////////////////////////////////////////////////////////
+extern PLODD_API _mf_logger_singleton file;
+
+//-------------------------DEFINITIONS-------------------------//
+//Definitions... heh.
 class _mf_logger_singleton : public base_logger {
     private:
         static multi_file_logger * mf_logger_obj;
@@ -41,9 +53,6 @@ class _mf_logger_singleton : public base_logger {
         void warn(std::string msg){ warn_function(msg); }
         void error(std::string msg){ error_function(msg); }
 };
-
-//Exposes a file logger for use like so: "logging::file.info("fake, helpful info.");"
-extern PLODD_API _mf_logger_singleton file;
 
 } //pld
 //-----------------------------------END_IF-----------------------------------//

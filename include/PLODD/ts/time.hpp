@@ -1,13 +1,14 @@
-//////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 /// @file time.hpp
 /// @author Elijah Hopp (github.mrzeusthecoder@gmail.com)
-/// @brief A thread safe time getter function intended for but not limited to internal use.
+/// @brief A thread safe time getter function intended for but not limited to
+/// internal use.
 /// @version 0.0.0
 /// @date 2020-02-28
-/// 
+///
 /// @copyright Copyright (c) 2020 Elijah Hopp, No Rights Reserved
-/// 
-//////////////////////////////////////////////////////////////////////
+///
+////////////////////////////////////////////////////////////////////////////////
 //--------------------------------DEFINE_GUARD--------------------------------//
 #ifndef PLODD_TS_GET_TIME_H_
 #define PLODD_TS_GET_TIME_H_
@@ -32,7 +33,6 @@ namespace ts {
 //TODO: Maybe use fmt::compile for some compile strings.
 //These are ISO. It is the international standard, so suck it up.
 const char * time_format = "{hour}:{minute}:{second}";
-//Year = 0, month = 1, day = 2.
 const char * date_format = "{year}-{month}-{day}";
 
 //Generating the time is expensive, so you just check if the elapsed seconds (since 1970 something) have changed,
