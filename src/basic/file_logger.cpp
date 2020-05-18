@@ -19,7 +19,7 @@ std::function<void(std::string)> _mf_logger_singleton::info_function = [](std::s
 std::function<void(std::string)> _mf_logger_singleton::warn_function = [](std::string msg){ (void)(msg); };
 std::function<void(std::string)> _mf_logger_singleton::error_function = [](std::string msg){ (void)(msg); };
 
-_mf_logger_singleton::_mf_logger_singleton() : base_logger("PLODD", level::DEBUG){}
+_mf_logger_singleton::_mf_logger_singleton() : base_logger("FILE", level::DEBUG){}
 
 void _mf_logger_singleton::init_files(std::string path){
     if(mf_logger_obj == nullptr){
@@ -28,10 +28,10 @@ void _mf_logger_singleton::init_files(std::string path){
         delete mf_logger_obj;
         mf_logger_obj = new multi_file_logger{path, logger_name, logger_level};
     }
-    debug_function = [this](std::string msg){ mf_logger_obj->debug(msg); };
-    info_function = [this](std::string msg){ mf_logger_obj->info(msg); };
-    warn_function = [this](std::string msg){ mf_logger_obj->warn(msg); };
-    error_function = [this](std::string msg){ mf_logger_obj->error(msg); };
+    debug_function = [](std::string msg){ mf_logger_obj->debug(msg); };
+    info_function = [](std::string msg){ mf_logger_obj->info(msg); };
+    warn_function = [](std::string msg){ mf_logger_obj->warn(msg); };
+    error_function = [](std::string msg){ mf_logger_obj->error(msg); };
 }
 
 std::string _mf_logger_singleton::get_name(){
