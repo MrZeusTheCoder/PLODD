@@ -8,6 +8,6 @@
 //-------------------------------CONSOLE_LOGGER-------------------------------//
 namespace pld {
 
-ostream_logger console{&std::cout, "PLODD", logging_level::DEBUG};
+ostream_logger console{&std::cout, "CONSOLE", logging_level::DEBUG};
 
 } //logging

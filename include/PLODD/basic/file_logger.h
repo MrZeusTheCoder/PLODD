@@ -13,7 +13,7 @@
 namespace pld {
 
 //A quick, ignoreable class declaration:
-class _mf_logger_singleton : public base_logger {
+class PLODD_API _mf_logger_singleton : public base_logger {
     private:
         static multi_file_logger * mf_logger_obj;
         //These switch to the multi-file logger when it has been constructed. 
