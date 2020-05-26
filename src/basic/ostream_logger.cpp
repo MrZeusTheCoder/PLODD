@@ -44,11 +44,13 @@ void ostream_logger::warn(std::string msg){
     }
 }
 void ostream_logger::error(std::string msg){
-    #if PLODD_NO_ANSI
-        (*stream_ptr) << "[" << get_time() << "]:" << logger_name << ":ERROR:" << msg << "\n";
-    #else
-        (*stream_ptr) << colours::red << "[" << get_time() << "]:" << logger_name << ":ERROR:" << msg << colours::reset << "\n";
-    #endif
+    if(logger_level <= logging_level::ERROR){
+        #if PLODD_NO_ANSI
+            (*stream_ptr) << "[" << get_time() << "]:" << logger_name << ":ERROR:" << msg << "\n";
+        #else
+            (*stream_ptr) << colours::red << "[" << get_time() << "]:" << logger_name << ":ERROR:" << msg << colours::reset << "\n";
+        #endif
+    }
 }
 
 } //pld

@@ -51,15 +51,36 @@ const std::string reverse_vid = "\033[7m";
 } //colours
 
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief The logging levels that define the volume at which you want to yell things.
+/// @brief The logging levels that define the volume at which you want to yell
+/// things.
+///
+/// Every logger should have a point at which it won't print logs. This allows
+/// for much cleaner log files. Sometimes you don't want to see debug
+/// information in a file. Sometimes you just want so see warnings and errors in
+/// the console. PLODD has a solution for this: logging levels. When you set the
+/// level of a logger it will only log logs that are identified as a level
+/// greater than or equal too (>=) the logging level.
+///
+/// Here is a list of the available logging and there intended uses: (but your
+/// welcome to use it how ever you want.)
+///
+/// - `DEBUG` is a level intended for debug messages.
+/// - `INFO` is intended for all informational logs that are helpful, but are
+///   not debug messages.
+/// - `WARN` is intended for all warning messages.
+/// - `ERROR` is intended for, believe it or not, errors.
+/// - `MUTE` is intended to mute a logger. The idea is that sometimes you may
+///   pass a logger to a function, or a function might use a global logger, and
+///   pollutes the logger interface with too many logs. Or you just don't want
+///   to see it's output.
 ////////////////////////////////////////////////////////////////////////////////
 enum class PLODD_API level {
     DEBUG, //No one need that, right?
     INFO, //Helpful.
     WARN, //Calm down, it'll be fine.
     ERROR, //Oh no, he has broken through our polymorphic xkcd defenses!
+    MUTE //...
 };
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// @brief A using-alias that allows code wrapped in the pld namespace to be more clear.
@@ -88,10 +109,11 @@ class PLODD_API base_logger {
         /// @brief The name of the logger.
         ///
         /// @details The human-readable identifier for a logger. This is often
-        /// included in a log so that the log's source can be identified.
+        /// included in a log so that the log's source can be identified. The
+        /// actual use of this member is up to the downstream implementation.
         ///
         /// This class member is tipically inherited as private (`class logger :
-        /// private base_logger {}`), and can be accessed by the `get_name`, and
+        /// private base_logger {}`), but can be accessed by the `get_name`, and
         /// `set_name` methods.
         ///
         /// @see get_name
@@ -103,12 +125,7 @@ class PLODD_API base_logger {
         /// @brief The logging level of the logger.
         ///
         /// @details Every logger should have<sup>1</sup> threshold at which it
-        /// will not log a requested log. This is simply for the sake of the
-        /// human reading the logs. Sometimes you don't want all the information
-        /// sent to a logger to actually be logged. Sometimes you only want,
-        /// let's say all the WARN and ERROR logs to be logged, but not the
-        /// insignificant INFO and DEBUG logs to be logged. This member defines
-        /// that threshold.
+        /// will not log a requested log. This member defines that threshold.
         ///
         /// This class member, just like the logger_name, is tipically inherited
         /// private, but can be accessed by it's getter and setter functions.
@@ -297,8 +314,10 @@ class PLODD_API base_logger {
 ///         }
 /// 
 ///         error(std::string message){
-///             //Errors will always be processed:
-///             voice_processer.say(message);
+///             if(logger_level <= pld::level::ERROR){
+///                 //Errors will always be processed:
+///                 voice_processer.say(message);
+///             }
 ///         }
 /// 
 ///         //Formatted logs are inherited from, but handled by the base_logger.
