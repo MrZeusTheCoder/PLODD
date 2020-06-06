@@ -96,7 +96,9 @@ void single_file_logger::warn(std::string msg){
 }
 
 void single_file_logger::error(std::string msg){
-    shared_handle->file << "[" << get_time() << "]:" << logger_name << ":ERROR:" << msg << std::endl;
+    if(logger_level <= logging_level::ERROR){
+        shared_handle->file << "[" << get_time() << "]:" << logger_name << ":ERROR:" << msg << std::endl;
+    }
 }
 
 } //pld

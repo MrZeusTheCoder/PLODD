@@ -126,7 +126,9 @@ void multi_file_logger::warn(std::string msg){
 
 void multi_file_logger::error(std::string msg){
     std::string formatted_log = "[" + get_time() + "]:" + logger_name + ":ERROR:" + msg;
-    shared_file_handles->main_file << formatted_log << std::endl;
+    if(logger_level <= logging_level::ERROR){
+        shared_file_handles->main_file << formatted_log << std::endl;
+    }
     shared_file_handles->debug_file << formatted_log << std::endl;
     shared_file_handles->error_file << formatted_log << std::endl; 
 }
