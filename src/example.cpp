@@ -137,4 +137,10 @@ int main(){
     std::cout << "You can see it both right here in the console and in the multi-file logger's file(s).\n";
     std::cout << "See:\n";
     both_logger_logs();
+
+    #ifdef _WIN32
+        std::cout << "Press any key to exit...\n"; 
+        std::string temp_str;
+        std::cin >> temp_str;
+    #endif
 }

@@ -118,10 +118,10 @@ endfunction(add_warnings target)
 
 if(BUILD_SHARED_LIBS)
 	add_library(PLODD SHARED ${lib_sources})
-	target_compile_definitions(PLODD PRIVATE -DPLODD_SHARED -DPLODD_EXPORT_API)
+	target_compile_definitions(PLODD PUBLIC -DPLODD_SHARED -DPLODD_EXPORT_API)
 else()
 	add_library(PLODD STATIC ${lib_sources})
-	target_compile_definitions(PLODD PRIVATE -DPLODD_STATIC)
+	target_compile_definitions(PLODD PUBLIC -DPLODD_STATIC)
 endif()
 
 target_include_directories(PLODD PRIVATE include)
